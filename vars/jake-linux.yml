@@ -1,0 +1,11 @@
+# => inherits: generic <= #
+
+features:
+  - cesena
+  - irssi
+  - noscript
+  - pinboard
+  - slackware
+  - unibo
+
+# vim: set filetype=yaml :
