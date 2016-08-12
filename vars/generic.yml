@@ -1,3 +1,5 @@
 features:
+  - vimperator
+  - vimperator_dir
 
 # vim: set filetype=yaml :
