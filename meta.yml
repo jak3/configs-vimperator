@@ -10,6 +10,6 @@ elems:
     dst: ~/.vimperator/<1>
     only:
       features:
-				- vimperator_dir
+        - vimperator_dir
 
 # vim: set filetype=eruby.yaml :
