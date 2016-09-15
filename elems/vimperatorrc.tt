@@ -88,11 +88,12 @@ command irs -nargs=0 -description "Goto IRS course page" tabopen http://apice.un
 command isac -nargs=0 -description "Goto ISAC course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/ISAC1516?language=it
 
 " Section: Functions {{{1 ------------------------------------------------------
-javascript <<EOF
-<% if has_feature? :pinboard %>
-" Pinboard {{{ 2 ---------------------------------------------------------------
-" Thanks to http://www.mozdev.org/pipermail/vimperator/2009-July/004526.html
 
+" Pinboard {{{2 ----------------------------------------------------------------
+" Thanks to http://www.mozdev.org/pipermail/vimperator/2009-July/004526.html
+javascript <<EOF
+
+<% if has_feature? :pinboard %>
 function pinboard_add(){
   with (content) {
     url=location.href;
@@ -112,13 +113,19 @@ function pinboard_readlater(){
 }
 
 <% end %>
-" Unibo {{{ 2 ------------------------------------------------------------------
+EOF
+
+" Unibo {{{2 -------------------------------------------------------------------
+
+javascript <<EOF
+
 <% if has_feature? :unibo %>
 function add_unibo_proxy(){
   with(content) {
     location.host+='.ezproxy.unibo.it';
   }
 }
+
 <% end %>
 EOF
 
