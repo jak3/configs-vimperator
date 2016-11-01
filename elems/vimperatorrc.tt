@@ -80,7 +80,7 @@ map <silent> <leader>s :stopall<CR>
 
 " Plugins {{{2 --------------------------------------------------------
 <% if has_feature? :noscript %>
-noremap <C-t> :noscript toggletemp<CR>
+noremap <C-t> :noscript allowpagetemp<CR>
 <% end %>
 
 " Section: Commands {{{1 -------------------------------------------------------
