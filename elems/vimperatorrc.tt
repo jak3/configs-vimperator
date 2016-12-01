@@ -61,6 +61,7 @@ map <silent> <leader>k :tabopen http://www.phrack.org/search.html?key=
 map <silent> <leader>m :tabopen https://pinboard.in/u:jak3<CR>
 <% end %>
 map <silent> <leader>t :tabopen http://translate.google.it/#en|it|
+map <silent> <leader>s :tabopen https://scholar.google.it/scholar?q=
 map <silent> <leader>u :tabopen http://www.urbandictionary.com/define.php?term=
 map <silent> <leader>w :tabopen http://wayback.archive.org/web/*/
 map <silent> <leader>y :tabopen https://www.youtube.com/results?search_query=
@@ -78,7 +79,7 @@ map <silent> <leader>p :winopen -private google<Space>
 <% if has_feature? :pinboard %>
 map <silent> <leader>r :javascript pinboard_readlater()<CR>
 <% end %>
-map <silent> <leader>s :stopall<CR>
+map <silent> <leader>S :stopall<CR>
 
 " Plugins {{{2 --------------------------------------------------------
 <% if has_feature? :noscript %>
