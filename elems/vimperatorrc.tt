@@ -87,10 +87,10 @@ noremap <C-t> :noscript allowpagetemp<CR>
 <% end %>
 
 " Section: Commands {{{1 -------------------------------------------------------
-command irs -nargs=0 -description "Goto IRS course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/IRS1516
-command isac -nargs=0 -description "Goto ISAC course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/ISAC1516?language=it
-command manrst -nargs=0 -description "Open two man pages about rst" javascript manrst()
-command dump -nargs=1 -description "Dump buffers to file" javascript dump_buffers("<args>")
+command! irs -nargs=0 -description "Goto IRS course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/IRS1516
+command! isac -nargs=0 -description "Goto ISAC course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/ISAC1516?language=it
+command! manrst -nargs=0 -description "Open two man pages about rst" javascript manrst()
+command! dump -nargs=1 -description "Dump buffers to file" javascript dump_buffers("<args>")
 
 " Section: Functions {{{1 ------------------------------------------------------
 
@@ -111,8 +111,12 @@ function dump_buffers(path){
   with (content) {
 
     urls="";
-    config.tabbrowser.browsers.forEach(function(tab){
-      urls+=tab.currentURI.spec + '\n';
+    len = config.tabbrowser.browsers.length;
+    l = parseInt(lowerLimit, 10) || 0;
+    r = parseInt(upperLimit, 10) || len;
+    config.tabbrowser.browsers.slice(l < 0? 0: l, r > len? len: r)
+      .forEach(function(tab, i){
+        urls+=tab.currentURI.spec + '\n';
     });
 
     var istream = converter.convertToInputStream(urls);
