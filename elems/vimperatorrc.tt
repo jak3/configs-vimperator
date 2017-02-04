@@ -66,6 +66,7 @@ map <silent> <leader>k :tabopen http://www.phrack.org/search.html?key=
 map <silent> <leader>m :tabopen https://pinboard.in/u:jak3<CR>
 <% end %>
 map <silent> <leader>t :tabopen http://translate.google.it/#en|it|
+map <silent> <leader>s :tabopen https://scholar.google.it/scholar?q=
 map <silent> <leader>u :tabopen http://www.urbandictionary.com/define.php?term=
 map <silent> <leader>w :tabopen http://wayback.archive.org/web/*/
 map <silent> <leader>y :tabopen https://www.youtube.com/results?search_query=
@@ -83,7 +84,7 @@ map <silent> <leader>p :winopen -private google<Space>
 <% if has_feature? :pinboard %>
 map <silent> <leader>r :javascript pinboard_readlater()<CR>
 <% end %>
-map <silent> <leader>s :stopall<CR>
+map <silent> <leader>S :stopall<CR>
 
 " Plugins {{{2 --------------------------------------------------------
 <% if has_feature? :noscript %>
@@ -91,11 +92,46 @@ noremap <C-t> :noscript allowpagetemp<CR>
 <% end %>
 
 " Section: Commands {{{1 -------------------------------------------------------
-command irs -nargs=0 -description "Goto IRS course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/IRS1516
-command isac -nargs=0 -description "Goto ISAC course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/ISAC1516?language=it
-command manrst -nargs=0 -description "Open two man pages about rst" javascript manrst()
+command! irs -nargs=0 -description "Goto IRS course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/IRS1516
+command! isac -nargs=0 -description "Goto ISAC course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/ISAC1516?language=it
+command! manrst -nargs=0 -description "Open two man pages about rst" javascript manrst()
+command! dump -nargs=1 -description "Dump buffers to file" javascript dump_buffers("<args>")
 
 " Section: Functions {{{1 ------------------------------------------------------
+
+" Personal {{{2 ----------------------------------------------------------------
+javascript <<EOF
+
+function dump_buffers(path){
+  Components.utils.import("resource://gre/modules/NetUtil.jsm");
+  Components.utils.import("resource://gre/modules/FileUtils.jsm");
+  var FileUtils = Cu.import("resource://gre/modules/FileUtils.jsm").FileUtils;
+
+  var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
+                  createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+  converter.charset = "UTF-8";
+
+  var file   = new FileUtils.File(path);
+
+  with (content) {
+
+    urls="";
+    len = config.tabbrowser.browsers.length;
+    l = parseInt(lowerLimit, 10) || 0;
+    r = parseInt(upperLimit, 10) || len;
+    config.tabbrowser.browsers.slice(l < 0? 0: l, r > len? len: r)
+      .forEach(function(tab, i){
+        urls+=tab.currentURI.spec + '\n';
+    });
+
+    var istream = converter.convertToInputStream(urls);
+    var ostream = FileUtils.openSafeFileOutputStream(file);
+
+    NetUtil.asyncCopy(istream, ostream);
+
+  }
+}
+EOF
 
 " Pinboard {{{2 ----------------------------------------------------------------
 " Thanks to http://www.mozdev.org/pipermail/vimperator/2009-July/004526.html
