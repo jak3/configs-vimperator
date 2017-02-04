@@ -32,8 +32,13 @@ map a :javascript pinboard_add()<CR>
 <% if has_feature? :unibo %>
 map p :javascript add_unibo_proxy()<CR>
 <% end %>
+
 " Firefox behavior of <C-w> is better than vimperator d, back to previous tab!
 map <silent> d <C-w>
+
+" Damn <C-k>
+map <C-k> ""
+
 map <silent> l gt
 map <silent> h gT
 map <silent> s :tabopen google<Space>

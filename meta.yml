@@ -1,12 +1,12 @@
 elems:
 
-  - src: elems/(vimperatorrc)$
+  - src: (vimperatorrc)$
     dst: ~/.<1>
     only:
       features:
         - vimperator
 
-  - src: elems/vimperator/(.+)$
+  - src: vimperator/(.+)$
     dst: ~/.vimperator/<1>
     only:
       features:
