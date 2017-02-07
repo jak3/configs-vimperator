@@ -39,6 +39,9 @@ map <silent> d <C-w>
 " Damn <C-k>
 map <C-k> ""
 
+" Awesome, switch to previous VISITED tab
+map <C-b> <C-^>
+
 map <silent> l gt
 map <silent> h gT
 map <silent> s :tabopen google<Space>
