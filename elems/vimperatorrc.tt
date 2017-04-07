@@ -95,8 +95,6 @@ noremap <C-t> :noscript allowpagetemp<CR>
 <% end %>
 
 " Section: Commands {{{1 -------------------------------------------------------
-command! irs -nargs=0 -description "Goto IRS course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/IRS1516
-command! isac -nargs=0 -description "Goto ISAC course page" tabopen http://apice.unibo.it/xwiki/bin/view/Courses/ISAC1516?language=it
 command! manrst -nargs=0 -description "Open two man pages about rst" javascript manrst()
 command! dump -nargs=1 -description "Dump buffers to file" javascript dump_buffers("<args>")
 
