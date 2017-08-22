@@ -63,6 +63,7 @@ map <silent> <leader>b :tabopen http://slackbuilds.org/result/?search=
 <% end %>
 map <silent> <leader>c :tabopen http://dictionary.cambridge.org/dictionary/british/
 map <silent> <leader>d :tabopen http://dictionary.reference.com/browse/
+map <silent> <leader>h :tabopen https://www.haskell.org/hoogle/?hoogle=
 map <silent> <leader>i :tabopen http://www.treccani.it/vocabolario/
 map <silent> <leader>k :tabopen http://www.phrack.org/search.html?key=
 <% if has_feature? :pinboard %>
